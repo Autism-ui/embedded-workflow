@@ -1,0 +1,52 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} GPIO 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "gpio.h"
+
+static GPIO_TypeDef *{{MODULE_NAME}}_port = NULL;
+static uint16_t {{MODULE_NAME}}_pin = 0;
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param port GPIO 端口
+ * @param pin GPIO 引脚
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(GPIO_TypeDef *port, uint16_t pin)
+{
+    {{MODULE_NAME}}_port = port;
+    {{MODULE_NAME}}_pin = pin;
+    /* TODO: 添加初始化代码 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}设置输出
+ * @param state 0: 低电平, 1: 高电平
+ */
+void {{MODULE_NAME}}_set(uint8_t state)
+{
+    HAL_GPIO_WritePin({{MODULE_NAME}}_port, {{MODULE_NAME}}_pin,
+                      state ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+/**
+ * @brief {{MODULE_NAME}}读取输入
+ * @return 0: 低电平, 1: 高电平
+ */
+uint8_t {{MODULE_NAME}}_get(void)
+{
+    return HAL_GPIO_ReadPin({{MODULE_NAME}}_port, {{MODULE_NAME}}_pin);
+}
+
+/**
+ * @brief {{MODULE_NAME}}翻转输出
+ */
+void {{MODULE_NAME}}_toggle(void)
+{
+    HAL_GPIO_TogglePin({{MODULE_NAME}}_port, {{MODULE_NAME}}_pin);
+}

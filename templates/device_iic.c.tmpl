@@ -1,0 +1,53 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} I2C 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "i2c.h"
+
+#define {{MODULE_NAME_UPPER}}_ADDR  0x00  /* TODO: 设置设备 I2C 地址 */
+
+static I2C_HandleTypeDef *{{MODULE_NAME}}_hi2c = NULL;
+static uint8_t {{MODULE_NAME}}_addr = {{MODULE_NAME_UPPER}}_ADDR;
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param hi2c I2C 句柄
+ * @param addr 设备地址
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(I2C_HandleTypeDef *hi2c, uint8_t addr)
+{
+    {{MODULE_NAME}}_hi2c = hi2c;
+    {{MODULE_NAME}}_addr = addr;
+    /* TODO: 添加初始化代码 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}读取寄存器
+ * @param reg 寄存器地址
+ * @param data 数据缓冲区
+ * @param len 读取长度
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_read_reg(uint8_t reg, uint8_t *data, uint16_t len)
+{
+    /* TODO: 实现读取逻辑 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}写入寄存器
+ * @param reg 寄存器地址
+ * @param data 数据指针
+ * @param len 写入长度
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_write_reg(uint8_t reg, uint8_t *data, uint16_t len)
+{
+    /* TODO: 实现写入逻辑 */
+    return 0;
+}

@@ -1,0 +1,61 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} SPI 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "spi.h"
+
+static SPI_HandleTypeDef *{{MODULE_NAME}}_hspi = NULL;
+static GPIO_TypeDef *{{MODULE_NAME}}_cs_port = NULL;
+static uint16_t {{MODULE_NAME}}_cs_pin = 0;
+
+/**
+ * @brief 片选使能
+ */
+static void {{MODULE_NAME}}_cs_low(void)
+{
+    HAL_GPIO_WritePin({{MODULE_NAME}}_cs_port, {{MODULE_NAME}}_cs_pin, GPIO_PIN_RESET);
+}
+
+/**
+ * @brief 片选禁止
+ */
+static void {{MODULE_NAME}}_cs_high(void)
+{
+    HAL_GPIO_WritePin({{MODULE_NAME}}_cs_port, {{MODULE_NAME}}_cs_pin, GPIO_PIN_SET);
+}
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param hspi SPI 句柄
+ * @param cs_port 片选 GPIO 端口
+ * @param cs_pin 片选引脚
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin)
+{
+    {{MODULE_NAME}}_hspi = hspi;
+    {{MODULE_NAME}}_cs_port = cs_port;
+    {{MODULE_NAME}}_cs_pin = cs_pin;
+
+    {{MODULE_NAME}}_cs_high();
+    /* TODO: 添加初始化代码 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}} SPI 传输
+ * @param tx_data 发送数据
+ * @param rx_data 接收数据
+ * @param len 数据长度
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_transfer(uint8_t *tx_data, uint8_t *rx_data, uint16_t len)
+{
+    {{MODULE_NAME}}_cs_low();
+    HAL_StatusTypeDef status = HAL_SPI_TransmitReceive({{MODULE_NAME}}_hspi, tx_data, rx_data, len, HAL_MAX_DELAY);
+    {{MODULE_NAME}}_cs_high();
+    return (status == HAL_OK) ? 0 : -1;
+}

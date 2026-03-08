@@ -1,0 +1,52 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} ADC 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "adc.h"
+
+static ADC_HandleTypeDef *{{MODULE_NAME}}_hadc = NULL;
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param hadc ADC 句柄
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(ADC_HandleTypeDef *hadc)
+{
+    {{MODULE_NAME}}_hadc = hadc;
+    /* TODO: 添加初始化代码 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}读取 ADC 值
+ * @param channel ADC 通道
+ * @return ADC 转换值
+ */
+uint32_t {{MODULE_NAME}}_read(uint32_t channel)
+{
+    ADC_ChannelConfTypeDef sConfig = {0};
+    sConfig.Channel = channel;
+    sConfig.Rank = 1;
+    sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+
+    HAL_ADC_ConfigChannel({{MODULE_NAME}}_hadc, &sConfig);
+    HAL_ADC_Start({{MODULE_NAME}}_hadc);
+    HAL_ADC_PollForConversion({{MODULE_NAME}}_hadc, HAL_MAX_DELAY);
+
+    return HAL_ADC_GetValue({{MODULE_NAME}}_hadc);
+}
+
+/**
+ * @brief {{MODULE_NAME}} ADC 值转换为电压
+ * @param adc_value ADC 原始值
+ * @param vref 参考电压 (mV)
+ * @return 电压值 (mV)
+ */
+uint32_t {{MODULE_NAME}}_to_voltage(uint32_t adc_value, uint32_t vref)
+{
+    return (adc_value * vref) / 4095;
+}

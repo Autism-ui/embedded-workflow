@@ -1,0 +1,54 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} TIM 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "tim.h"
+
+static TIM_HandleTypeDef *{{MODULE_NAME}}_htim = NULL;
+static uint32_t {{MODULE_NAME}}_channel = 0;
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param htim TIM 句柄
+ * @param channel PWM 通道
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(TIM_HandleTypeDef *htim, uint32_t channel)
+{
+    {{MODULE_NAME}}_htim = htim;
+    {{MODULE_NAME}}_channel = channel;
+    /* TODO: 添加初始化代码 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}启动 PWM
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_pwm_start(void)
+{
+    return (HAL_TIM_PWM_Start({{MODULE_NAME}}_htim, {{MODULE_NAME}}_channel) == HAL_OK) ? 0 : -1;
+}
+
+/**
+ * @brief {{MODULE_NAME}}停止 PWM
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_pwm_stop(void)
+{
+    return (HAL_TIM_PWM_Stop({{MODULE_NAME}}_htim, {{MODULE_NAME}}_channel) == HAL_OK) ? 0 : -1;
+}
+
+/**
+ * @brief {{MODULE_NAME}}设置 PWM 占空比
+ * @param duty 占空比 (0-1000, 对应 0.0%-100.0%)
+ */
+void {{MODULE_NAME}}_set_duty(uint16_t duty)
+{
+    uint32_t period = __HAL_TIM_GET_AUTORELOAD({{MODULE_NAME}}_htim);
+    uint32_t compare = (period * duty) / 1000;
+    __HAL_TIM_SET_COMPARE({{MODULE_NAME}}_htim, {{MODULE_NAME}}_channel, compare);
+}

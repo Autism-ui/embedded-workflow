@@ -1,0 +1,20 @@
+######################################
+# format 目标（clang-format）
+# 由 embedded-workflow 生成
+######################################
+
+# 业务层源文件目录
+FORMAT_DIRS ?= fal pal common utilities/devices drivers middlewares
+
+# 格式化所有业务层代码
+format:
+	@echo "Formatting code..."
+	@find $(FORMAT_DIRS) -type f \( -name "*.c" -o -name "*.h" \) \
+		-exec clang-format -i {} \;
+	@echo "Format complete."
+
+# 检查格式（CI 用）
+format-check:
+	@echo "Checking code format..."
+	@find $(FORMAT_DIRS) -type f \( -name "*.c" -o -name "*.h" \) \
+		-exec clang-format --dry-run --Werror {} \;

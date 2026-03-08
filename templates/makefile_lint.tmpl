@@ -1,0 +1,26 @@
+######################################
+# lint 目标（cppcheck）
+# 由 embedded-workflow 生成
+######################################
+
+# 检查目录
+LINT_DIRS ?= fal pal common
+
+# 排除目录
+LINT_EXCLUDE ?= hal/core
+
+# 包含路径（用于分析）
+LINT_INCLUDES = $(patsubst -I%,--include=%,$(filter -I%,$(C_INCLUDES)))
+
+lint:
+	@echo "Running static analysis..."
+	@cppcheck --enable=warning,style,performance,portability \
+		--suppress=missingIncludeSystem \
+		--suppress=unmatchedSuppression \
+		$(LINT_INCLUDES) \
+		$(patsubst %,-i %,$(LINT_EXCLUDE)) \
+		--error-exitcode=1 \
+		$(LINT_DIRS)
+	@echo "Static analysis complete."
+
+.PHONY: lint

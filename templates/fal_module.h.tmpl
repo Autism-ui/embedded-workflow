@@ -1,0 +1,26 @@
+/**
+ * @file {{MODULE_NAME}}.h
+ * @brief {{MODULE_NAME}}模块接口
+ * @date {{DATE}}
+ */
+
+#ifndef __FAL_{{MODULE_NAME_UPPER}}_H__
+#define __FAL_{{MODULE_NAME_UPPER}}_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "main.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+/* 公共函数声明 */
+void {{MODULE_NAME}}_init(void);
+void {{MODULE_NAME}}_task(void *argument);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __FAL_{{MODULE_NAME_UPPER}}_H__ */

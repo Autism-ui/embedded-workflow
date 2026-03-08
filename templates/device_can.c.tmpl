@@ -1,0 +1,47 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} CAN 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "can.h"
+
+static CAN_HandleTypeDef *{{MODULE_NAME}}_hcan = NULL;
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param hcan CAN 句柄
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(CAN_HandleTypeDef *hcan)
+{
+    {{MODULE_NAME}}_hcan = hcan;
+    /* TODO: 配置 CAN 过滤器 */
+    /* TODO: 启动 CAN */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}发送 CAN 帧
+ * @param id CAN ID
+ * @param data 数据指针
+ * @param len 数据长度 (0-8)
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_send(uint32_t id, uint8_t *data, uint8_t len)
+{
+    CAN_TxHeaderTypeDef tx_header;
+    uint32_t tx_mailbox;
+
+    tx_header.StdId = id;
+    tx_header.IDE = CAN_ID_STD;
+    tx_header.RTR = CAN_RTR_DATA;
+    tx_header.DLC = len;
+
+    if (HAL_CAN_AddTxMessage({{MODULE_NAME}}_hcan, &tx_header, data, &tx_mailbox) != HAL_OK)
+    {
+        return -1;
+    }
+    return 0;
+}

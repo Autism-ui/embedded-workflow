@@ -1,0 +1,36 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}}模块实现
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "fal.h"
+
+/* 任务句柄 */
+static TaskHandle_t {{MODULE_NAME}}_task_handle = NULL;
+
+/**
+ * @brief {{MODULE_NAME}}模块初始化
+ */
+void {{MODULE_NAME}}_init(void)
+{
+    /* TODO: 添加初始化代码 */
+
+    /* 创建任务 */
+    xTaskCreate({{MODULE_NAME}}_task, "{{MODULE_NAME}}", 512, NULL, osPriorityNormal, &{{MODULE_NAME}}_task_handle);
+}
+
+/**
+ * @brief {{MODULE_NAME}}任务主循环
+ * @param argument 任务参数
+ */
+void {{MODULE_NAME}}_task(void *argument)
+{
+    for (;;)
+    {
+        /* TODO: 添加任务逻辑 */
+
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+}

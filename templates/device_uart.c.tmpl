@@ -1,0 +1,43 @@
+/**
+ * @file {{MODULE_NAME}}.c
+ * @brief {{MODULE_NAME}} UART 设备驱动
+ * @date {{DATE}}
+ */
+
+#include "{{MODULE_NAME}}.h"
+#include "usart.h"
+
+/**
+ * @brief {{MODULE_NAME}}初始化
+ * @param huart UART 句柄
+ * @return 0: 成功, -1: 失败
+ */
+int {{MODULE_NAME}}_init(UART_HandleTypeDef *huart)
+{
+    /* TODO: 添加初始化代码 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}发送数据
+ * @param data 数据指针
+ * @param len 数据长度
+ * @return 发送的字节数
+ */
+int {{MODULE_NAME}}_send(uint8_t *data, uint16_t len)
+{
+    /* TODO: 实现发送逻辑 */
+    return 0;
+}
+
+/**
+ * @brief {{MODULE_NAME}}接收数据
+ * @param data 数据缓冲区
+ * @param len 缓冲区大小
+ * @return 接收的字节数
+ */
+int {{MODULE_NAME}}_recv(uint8_t *data, uint16_t len)
+{
+    /* TODO: 实现接收逻辑 */
+    return 0;
+}
