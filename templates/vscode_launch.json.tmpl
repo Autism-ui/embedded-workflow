@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/{{TARGET}}.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "{{DEBUGGER_TYPE}}",
+            "device": "{{DEVICE}}",
+            "interface": "{{INTERFACE}}",
+            "svdFile": "${workspaceFolder}/{{SVD_FILE}}",
+            "preLaunchTask": "build"
+        }
+    ]
+}

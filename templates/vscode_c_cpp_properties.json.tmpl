@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "ARM",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/hal",
+                "${workspaceFolder}/hal/core/Inc",
+                "${workspaceFolder}/fal",
+                "${workspaceFolder}/pal",
+                "${workspaceFolder}/common",
+                "${workspaceFolder}/utilities",
+                "${workspaceFolder}/drivers",
+                "${workspaceFolder}/middlewares"
+            ],
+            "defines": [
+                "{{CHIP_DEFINE}}",
+                "USE_HAL_DRIVER"
+            ],
+            "compilerPath": "{{COMPILER_PATH}}",
+            "cStandard": "c11",
+            "intelliSenseMode": "gcc-arm",
+            "compilerArgs": [
+                "-mcpu={{CPU}}",
+                "-mthumb"
+            ]
+        }
+    ],
+    "version": 4
+}

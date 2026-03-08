@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "make",
+            "args": ["-j$(nproc)"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"]
+        },
+        {
+            "label": "flash",
+            "type": "shell",
+            "command": "make",
+            "args": ["flash"],
+            "dependsOn": ["build"]
+        },
+        {
+            "label": "download",
+            "type": "shell",
+            "command": "make",
+            "args": ["download"],
+            "dependsOn": ["build"]
+        }
+    ]
+}
