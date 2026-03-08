@@ -1,0 +1,20 @@
+######################################
+# download 目标（J-Link）
+# 由 embedded-workflow 生成
+######################################
+JLINK_DEVICE ?= {{DEVICE}}
+JLINK_IF ?= {{INTERFACE}}
+JLINK_SPEED ?= 4000
+FLASH_ADDR ?= {{FLASH_ADDR}}
+
+download: all $(BUILD_DIR)/flash.jlink
+	JLinkExe -device $(JLINK_DEVICE) -if $(JLINK_IF) -speed $(JLINK_SPEED) \
+		-CommanderScript $(BUILD_DIR)/flash.jlink
+
+$(BUILD_DIR)/flash.jlink: $(BUILD_DIR)/$(TARGET).bin
+	@echo "r" > $@
+	@echo "h" >> $@
+	@echo "loadfile $(BUILD_DIR)/$(TARGET).bin $(FLASH_ADDR)" >> $@
+	@echo "r" >> $@
+	@echo "g" >> $@
+	@echo "exit" >> $@

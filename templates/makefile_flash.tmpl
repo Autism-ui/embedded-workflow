@@ -1,0 +1,14 @@
+######################################
+# flash 目标（OpenOCD）
+# 由 embedded-workflow 生成
+######################################
+OPENOCD_INTERFACE ?= {{INTERFACE}}
+OPENOCD_TARGET ?= {{TARGET_CFG}}
+
+flash: all
+	openocd -f interface/$(OPENOCD_INTERFACE).cfg -f target/$(OPENOCD_TARGET).cfg \
+		-c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
+
+flash-bin: all
+	openocd -f interface/$(OPENOCD_INTERFACE).cfg -f target/$(OPENOCD_TARGET).cfg \
+		-c "program $(BUILD_DIR)/$(TARGET).bin verify reset exit {{FLASH_ADDR}}"
