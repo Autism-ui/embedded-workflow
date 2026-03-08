@@ -1,0 +1,15 @@
+{
+  "name": "embedded-workflow",
+  "version": "0.1.0",
+  "description": "嵌入式软件开发全流程工作流辅助工具",
+  "commands": {
+    "init": "skills/init/prompt.md",
+    "build": "skills/build/prompt.md",
+    "flash": "skills/flash/prompt.md",
+    "download": "skills/flash/prompt.md",
+    "debug": "skills/debug/prompt.md",
+    "module": "skills/module/prompt.md",
+    "format": "skills/format/prompt.md",
+    "lint": "skills/lint/prompt.md"
+  }
+}
